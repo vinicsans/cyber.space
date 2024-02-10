@@ -9,10 +9,20 @@ import SwiftUI
 
 struct RotateView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text("Hello! Before starting the experiment, please set your device to landscape mode.")
+            
+            Image(systemName: "rectangle.landscape.rotate")
+            
+            Button (action: {
+            }, label: {
+                Text("I rotated.")
+            })
+        }
     }
 }
 
 #Preview {
     RotateView()
 }
+
