@@ -42,7 +42,7 @@ struct UIPlanetView: View {
             
             Button(action: {}, label: {
                 HStack(alignment: .center, spacing: 12) {
-                    Text("Start experience")
+                    Text("Start")
                         .font(.title2)
                     
                     Image(systemName: "play.fill")
