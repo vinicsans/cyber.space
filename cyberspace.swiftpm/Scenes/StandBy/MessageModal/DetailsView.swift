@@ -7,12 +7,33 @@
 
 import SwiftUI
 
-struct SwiftUIView: View {
+struct MessageDetailsView: View {
+    var message: Message
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .center) {
+            Text(message.content)
+                .multilineTextAlignment(.leading)
+        }
+            .padding(32)
+            .frame(width: .infinity)
+            .navigationTitle(message.title)
+            .toolbar {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 16))
+                        .frame(width: 32, height: 32)
+                        .background(.quaternary)
+                        .clipShape(Circle())
+                })
+            }
     }
 }
 
 #Preview {
-    SwiftUIView()
+    MessageDetailsView(message: Message(author: "webVinic", title: "Hello", content: "aaa", isRead: false))
 }

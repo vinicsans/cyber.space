@@ -13,6 +13,8 @@ struct UIStandByView: View {
     
     private let cyberPoints = 0
     
+    @State private var showModal = false
+    
     var body: some View {
         VStack(alignment: .center) {
             HStack (alignment: .top) {
@@ -36,7 +38,7 @@ struct UIStandByView: View {
                 
                 Spacer()
                 
-                Button(action: {}, label: {
+                Button(action: { self.showModal = true }, label: {
                     Image(systemName: "envelope.fill")
                         .foregroundStyle(Color("Text"))
                         .font(.largeTitle)
@@ -44,6 +46,10 @@ struct UIStandByView: View {
             }
         }
         .padding(64)
+        .sheet(isPresented: $showModal) {
+            MessageView()
+        }
+        .preferredColorScheme(.dark)
     }
 }
 

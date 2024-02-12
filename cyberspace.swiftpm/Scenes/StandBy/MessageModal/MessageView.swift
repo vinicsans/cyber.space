@@ -2,9 +2,9 @@ import SwiftUI
 
 struct MessageView: View {
     
-    let items: [Message] = [
+    var items: [Message] = [
         Message(author: "webvinic", title: "Item 1", content: "Descrição do item 1", isRead: false),
-        Message(author: "webvinic", title: "Item 1", content: "Descrição do item 1", isRead: false),
+        Message(author: "webvinic", title: "Item 1", content: "Strong passwords: Use strong passwords, which are like magic keys protecting your spaceshipin cyberspace. They should be a complex mix of letters, numbers, and symbols, making them extremely difficult for intruders to guess. This prevents brute force attacks, where robots try to guess your password repeatedly.", isRead: false),
     ]
     
     @State private var showModal = false
@@ -13,7 +13,9 @@ struct MessageView: View {
     var body: some View {
         NavigationView {
             List(items) { item in
-               MessageLineRow(message: item)
+                NavigationLink(destination: MessageDetailsView(message: item), label: {
+                    MessageLineRow(message: item)
+                })
             }
             .navigationTitle("E-mails")
             .toolbar {
@@ -31,40 +33,6 @@ struct MessageView: View {
     }
 }
 
-struct MessageLineRow: View {
-    let message: Message
-    
-    var body: some View {
-        HStack {
-            if message.isRead == true {
-                Text("\(message.author): \(message.content)")
-            } else {
-                Text("Nova mensagem de \(message.author)")
-                    .bold()
-                
-                Spacer()
-                
-                MessagePin()
-            }
-        }
-    }
-}
-
-struct MessagePin: View {
-    var body: some View {
-        ZStack {
-            Circle()
-                .fill(.red)
-                .frame(width: 32, height: 32)
-            
-            Text("+1")
-                .font(.system(size: 16))
-                .bold()
-                .foregroundStyle(.white)
-        }
-        .padding(6)
-    }
-}
 
 #Preview {
     MessageView()
