@@ -13,7 +13,7 @@ struct ContentView: View {
     internal let arrayOfViews: [AnyView] = [
         AnyView(RotateView()),
         AnyView(HomePlanetView()),
-        AnyView(RotateView())
+        AnyView(HomePlanetIntro())
     ]
     
     @StateObject private var event = NextSceneEvent()

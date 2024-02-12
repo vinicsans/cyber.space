@@ -54,7 +54,7 @@ struct UIPlanetView: View {
         .opacity(opacityAmount)
         .animation(.easeInOut(duration: 1), value: opacityAmount)
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(Int(0.300))) {
                 startAnimation()
             }
         }
@@ -72,7 +72,7 @@ extension UIPlanetView {
     func finishAnimation() {
         opacityAmount = 0
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(67000)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(Int(1))) {
             event.toggleScene()
         }
     }

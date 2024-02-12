@@ -10,7 +10,8 @@ import SwiftUI
 struct RotateView: View {
     @EnvironmentObject private var event: NextSceneEvent
     
-    @State private var blurAmount: Int = 80
+    @State private var blurAmount: CGFloat = 80
+    @State private var opacityAmount: Double = 100
     
     var body: some View {
         ZStack {
@@ -19,8 +20,8 @@ struct RotateView: View {
             
                 .scaledToFill()
                 .aspectRatio(contentMode: .fill)
-                .blur(radius: CGFloat(blurAmount), opaque: true)
-            
+                .blur(radius: blurAmount, opaque: true)
+                .animation(.smooth(duration: 0.3), value: blurAmount)
             
             VStack() {
                 Text("For this experience, leave your phone in landscape mode.")
@@ -29,7 +30,7 @@ struct RotateView: View {
                     .foregroundStyle(.ultraThickMaterial)
                 
                 Button(action: {
-                    event.toggleScene()
+                    finishAnimation()
                 }, label: {
                     Text("Confirm")
                         .font(.title3)
@@ -41,6 +42,21 @@ struct RotateView: View {
                 .background(.regularMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
             }
+            .opacity(opacityAmount)
+            .animation(.smooth(duration: 0.1), value: opacityAmount)
+        }
+    }
+}
+
+// Animation
+
+extension RotateView {
+    func finishAnimation() {
+        opacityAmount = 0
+        blurAmount = 0
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+            event.toggleScene()
         }
     }
 }
