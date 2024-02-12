@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StandBy: View {
+struct StandByView: View {
     private let starsBackgroundImage = Image("stars")
     
     var body: some View {
@@ -30,6 +30,8 @@ struct StandBy: View {
                         .frame(width: 250, height: 250)
                 }
             }
+            
+            UIStandByView()
         }
     }
 }
@@ -44,5 +46,5 @@ struct PlanetView: View {
 }
 
 #Preview {
-    StandBy()
+    StandByView()
 }

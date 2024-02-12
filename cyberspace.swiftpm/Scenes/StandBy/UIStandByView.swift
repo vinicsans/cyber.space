@@ -8,11 +8,48 @@
 import SwiftUI
 
 struct UIStandByView: View {
+    
+    private let idText = "Spaceship ID - 322883133"
+    
+    private let cyberPoints = 0
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .center) {
+            HStack (alignment: .top) {
+                Text(idText)
+                    .foregroundStyle(Color("Text"))
+                    .font(.system(size: 28, weight: .bold, design: .monospaced))
+                
+                Spacer()
+                
+                Text("Cyberpoints: \(cyberPoints)")
+                    .foregroundStyle(Color("Text"))
+                    .font(.system(size: 28, weight: .bold, design: .monospaced))
+            }
+            
+            Spacer()
+            
+            HStack (alignment: .bottom) {
+                Text("> ship ready for take-off.")
+                    .foregroundStyle(Color("Text"))
+                    .font(.system(size: 20, weight: .regular, design: .monospaced))
+                
+                Spacer()
+                
+                Button(action: {}, label: {
+                    Image(systemName: "envelope.fill")
+                        .foregroundStyle(Color("Text"))
+                        .font(.largeTitle)
+                })
+            }
+        }
+        .padding(64)
     }
 }
 
 #Preview {
-    UIStandByView()
+    ZStack {
+        StandByView()
+        UIStandByView()
+    }
 }

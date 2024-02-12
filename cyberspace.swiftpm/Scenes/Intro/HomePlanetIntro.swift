@@ -40,7 +40,12 @@ struct PlanetIntroView: View {
                 .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
 
-            NavigationLink {StandByView()} label: {
+            NavigationLink {
+                StandByView()
+                    .navigationBarHidden(true)
+                    .navigationBarBackButtonHidden(true)
+                    .statusBar(hidden: true)
+            } label: {
                 Text("Start Mission")
                     .bold()
                     .foregroundStyle(.ultraThickMaterial)
