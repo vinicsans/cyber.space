@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct RotateView: View {
-    @EnvironmentObject private var event: nextSceneEvent
+    @EnvironmentObject private var event: NextSceneEvent
+    
+    @State private var blurAmount: Int = 80
     
     var body: some View {
         ZStack {
@@ -17,7 +19,7 @@ struct RotateView: View {
             
                 .scaledToFill()
                 .aspectRatio(contentMode: .fill)
-                .blur(radius: 80, opaque: true)
+                .blur(radius: CGFloat(blurAmount), opaque: true)
             
             
             VStack() {
@@ -27,7 +29,7 @@ struct RotateView: View {
                     .foregroundStyle(.ultraThickMaterial)
                 
                 Button(action: {
-                    event.nextScene += 1
+                    event.toggleScene()
                 }, label: {
                     Text("Confirm")
                         .font(.title3)

@@ -1,28 +1,38 @@
 import SwiftUI
 
-struct ContentView: View {
-    @State private var isRotate: Bool = false
+class NextSceneEvent: ObservableObject {
+    @Published var actualScene: Int = 0
     
-    var body: some View {
-        
-        if isRotate == false {
-            VStack(spacing: 24) {
-                Text("Hello! Before starting the experiment, please set your device to landscape mode.")
-                    .font(.title3)
+    func toggleScene() {
+            actualScene += 1
+    }
+}
 
-                                
-                Button (action: {
-                    isRotate = true
-                }, label: {
-                    Text("I rotated.")
-                    Image(systemName: "rectangle.landscape.rotate")
-                }).padding(12)
-                    .background(.quinary)
-                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+struct ContentView: View {
+        
+    internal let arrayOfViews: [AnyView] = [
+        AnyView(RotateView()),
+        AnyView(HomePlanetView()),
+        AnyView(RotateView())
+    ]
+    
+    @StateObject private var event = NextSceneEvent()
+                    
+    var body: some View {
+        NavigationStack {
+            if (event.actualScene <= arrayOfViews.count - 1) {
+                
+                ZStack {
+                    arrayOfViews[event.actualScene]
+                        .environmentObject(event)
+                }
+            } else {
+                Text("Ops! Cena além do índice.")
             }
-        } else {
-            HomePlanetView()
-                .frame(width: .infinity, height: .infinity)
         }
+        .toolbar(.hidden)
+            .onAppear {
+                print(arrayOfViews.count - 1)
+            }
     }
 }

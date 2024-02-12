@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomePlanetView: View {
+    @EnvironmentObject var event: NextSceneEvent
+    
     var body: some View {
         ZStack {
             Image("planet_background_x6")
@@ -33,6 +35,8 @@ struct HomePlanetView: View {
 // MARK: Interface
 
 struct UIPlanetView: View {
+    @EnvironmentObject private var event: NextSceneEvent
+    
     var body: some View {
         VStack(spacing: 16) {
             Text("cyber.space")
@@ -40,7 +44,9 @@ struct UIPlanetView: View {
             
             .foregroundColor(.black.opacity(0.75))
             
-            Button(action: {}, label: {
+            Button(action: {
+                event.toggleScene()
+            }, label: {
                 HStack(alignment: .center, spacing: 12) {
                     Text("Start")
                         .font(.title2)
@@ -55,8 +61,4 @@ struct UIPlanetView: View {
             })
         }
     }
-}
-
-#Preview {
-    HomePlanetView()
 }
