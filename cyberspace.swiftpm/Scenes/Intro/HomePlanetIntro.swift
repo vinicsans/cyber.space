@@ -40,7 +40,7 @@ struct PlanetIntroView: View {
                 .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
 
-            Button(action: startMission) {
+            NavigationLink {StandByView()} label: {
                 Text("Start Mission")
                     .bold()
                     .foregroundStyle(.ultraThickMaterial)
@@ -60,13 +60,6 @@ struct PlanetIntroView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3)) {
                 showIntro()
             }
-        }
-    }
-
-    private func startMission() {
-        isVisible = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3)) {
-            event.toggleScene()
         }
     }
 
