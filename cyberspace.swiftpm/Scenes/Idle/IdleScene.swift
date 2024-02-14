@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct StandByView: View {
+struct IdleScene: View {
+    @ObservedObject var viewModel = IdleViewModel()
+
     private let starsBackgroundImage = Image("stars")
     
     var body: some View {
@@ -31,7 +33,20 @@ struct StandByView: View {
                 }
             }
             
-            UIStandByView()
+            VStack {
+                switch viewModel.state {
+                case .botAttack:
+                    BotAttackScene()
+                case .firewallAttack:
+                    Text("Logged in")
+                case .passwordAttack:
+                    Text("Resetting password")
+                case .phishingAttack:
+                    Text("Resetting password")
+                default:
+                    UIIdleMenuView(parentViewModel: viewModel)
+                }
+            }
         }
     }
 }
@@ -46,5 +61,5 @@ struct PlanetView: View {
 }
 
 #Preview {
-    StandByView()
+    IdleScene()
 }

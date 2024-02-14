@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomePlanetView: View {
+struct IntroMenuScene: View {
     @EnvironmentObject var event: NextSceneEvent
     
     private let backgroundImage = Image("planet_background_x6")
@@ -80,6 +80,6 @@ extension UIPlanetView {
 
 
 #Preview {
-    HomePlanetView()
+    IntroMenuScene()
 }
 

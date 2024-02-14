@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HomePlanetIntro: View {
+struct IntroPlanetScene: View {
     @EnvironmentObject var event: NextSceneEvent
 
     private let planetBackgroundImage = Image("planet_background_x6")
@@ -41,7 +41,7 @@ struct PlanetIntroView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 24))
 
             NavigationLink {
-                StandByView()
+                IdleScene()
                     .navigationBarHidden(true)
                     .navigationBarBackButtonHidden(true)
                     .statusBar(hidden: true)
@@ -74,5 +74,5 @@ struct PlanetIntroView: View {
 }
 
 #Preview {
-    HomePlanetIntro()
+    IntroPlanetScene()
 }

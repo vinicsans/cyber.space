@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RotateView: View {
+struct RotateScene: View {
     @EnvironmentObject private var event: NextSceneEvent
     
     @State private var blurAmount: CGFloat = 80
@@ -24,7 +24,7 @@ struct RotateView: View {
                 .animation(.smooth(duration: 0.3), value: blurAmount)
             
             VStack() {
-                Text("For this experience, leave your phone in landscape mode.")
+                Text("For this experience, please rotate your device to landscape mode.")
                     .font(.largeTitle)
                     .bold()
                     .foregroundStyle(.ultraThickMaterial)
@@ -50,7 +50,7 @@ struct RotateView: View {
 
 // Animation
 
-extension RotateView {
+extension RotateScene {
     func finishAnimation() {
         opacityAmount = 0
         blurAmount = 0
@@ -62,6 +62,6 @@ extension RotateView {
 }
 
 #Preview {
-    RotateView()
+    RotateScene()
 }
 

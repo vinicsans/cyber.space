@@ -10,9 +10,9 @@ class NextSceneEvent: ObservableObject {
 
 struct IntroductionViews: View {
     internal let arrayOfViews: [AnyView] = [
-        AnyView(RotateView()),
-        AnyView(HomePlanetView()),
-        AnyView(HomePlanetIntro()),
+        AnyView(RotateScene()),
+        AnyView(IntroMenuScene()),
+        AnyView(IntroPlanetScene()),
     ]
     
     @StateObject private var event = NextSceneEvent()

@@ -14,9 +14,9 @@ struct MessageLineRow: View {
     var body: some View {
         HStack {
             if message.isRead == true {
-                Text("\(message.author): \(message.content)")
+                Text("\(message.authorName): \(message.content)")
             } else {
-                Text("Nova mensagem de \(message.author)")
+                Text("Nova mensagem de \(message.authorName)")
                     .bold()
                 
                 Spacer()
