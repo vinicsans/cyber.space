@@ -50,12 +50,6 @@ struct UIIdleMenuView: View {
         .sheet(isPresented: $showModal) {
             MessageView(messageManager: messageManager)
                 .preferredColorScheme(.dark)
-        }.onDisappear {
-            if hasUnreadMessages == false && messageManager.allMessagesRead() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    parentViewModel.botAttack()
-                }
-            }
         }
         .overlay {
             GeometryReader { geometry in

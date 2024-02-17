@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct IdleScene: View {
+    @ObservedObject var messageManager = MessageManager()
+
     @ObservedObject var viewModel = IdleViewModel()
+    @State private var showModal = true
 
     private let starsBackgroundImage = Image("stars")
     
@@ -36,16 +39,21 @@ struct IdleScene: View {
             VStack {
                 switch viewModel.state {
                 case .botAttack:
-                    BotAttackScene()
+                    Text("Bot Attack")
                 case .firewallAttack:
                     Text("Logged in")
                 case .passwordAttack:
-                    Text("Resetting password")
+                    Modal<PasswordView>(showModal: $showModal, title: "// RESET ACCESS PASSWORD", content: PasswordView())
                 case .phishingAttack:
                     Text("Resetting password")
                 default:
                     UIIdleMenuView(parentViewModel: viewModel)
+            
                 }
+            }
+        }        .onAppear {
+            let timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+                viewModel.passwordAttack()
             }
         }
     }

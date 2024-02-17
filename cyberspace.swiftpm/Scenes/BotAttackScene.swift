@@ -27,7 +27,8 @@ struct BotAttackScene: View {
                     
                     Spacer()
                 }
-                .padding(EdgeInsets(top: 48, leading: 24, bottom: 0, trailing: 0))
+                .ignoresSafeArea()
+                .padding(48)
                 
                 Spacer()
             }
