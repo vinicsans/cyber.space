@@ -8,8 +8,8 @@ struct Modal<Content: View >: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 30)
-                .overlay(RoundedRectangle(cornerRadius: 30).stroke(Color.gray.opacity(0.2), lineWidth: 1))
+            RoundedRectangle(cornerRadius: 24)
+                .overlay(RoundedRectangle(cornerRadius: 24).stroke(Color.gray.opacity(0.2), lineWidth: 1))
                 .foregroundStyle(.thickMaterial)
             
             VStack(spacing: 12) {
@@ -17,9 +17,8 @@ struct Modal<Content: View >: View {
                 
                 Spacer()
                 
-                ScrollView {
-                    content
-                }
+                content
+            
                 .multilineTextAlignment(.leading)
             }
             .padding(32)

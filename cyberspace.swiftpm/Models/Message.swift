@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Message: Identifiable {
+struct Message: Identifiable, Hashable {
     let id = UUID()
     
     let authorEmail: String
