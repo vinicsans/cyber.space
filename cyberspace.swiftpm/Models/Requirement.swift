@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum RequirementType {
     case more12Char
@@ -40,9 +41,4 @@ struct Requirement {
             fatalError("Not defined content")
         }
     }
-}
-
-struct PasswordPart {
-    let id = UUID()
-    let content: String
 }

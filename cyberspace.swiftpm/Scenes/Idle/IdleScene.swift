@@ -43,7 +43,8 @@ struct IdleScene: View {
                 case .firewallAttack:
                     Text("Logged in")
                 case .passwordAttack:
-                    Modal<PasswordView>(showModal: $showModal, title: "// RESET ACCESS PASSWORD", content: PasswordView())
+                    Modal<PasswordView>(showModal: $showModal, showClose: false, title: "// RESET ACCESS PASSWORD", content: PasswordView())
+                        .preferredColorScheme(.dark)
                 case .phishingAttack:
                     Text("Resetting password")
                 default:

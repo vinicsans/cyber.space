@@ -21,6 +21,8 @@ struct HighlightedText: View {
 
     private var attributedString: AttributedString {
         var attributedString = AttributedString(text)
+        
+        attributedString.foregroundColor = Color(.text)
 
         if let range = attributedString.range(of: highlighted) {
             attributedString[range].font = .system(size: CGFloat(size), weight: .bold)
