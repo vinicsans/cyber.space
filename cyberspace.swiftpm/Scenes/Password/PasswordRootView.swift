@@ -13,9 +13,9 @@ struct PasswordView: View {
             Text("To create a password, drag the parts of the desired password into the input field.")
                 .foregroundColor(Color(.text))
 
-            HighlightedText(text: "Security: \(viewModel.passwordStrength.title)", highlighted: viewModel.passwordStrength.title, color: viewModel.passwordColor, size: 16)
+            HighlightedText(text: "Security: \(viewModel.passwordSecurity.content)", highlighted: viewModel.passwordSecurity.content, color: viewModel.passwordColor, size: 16)
 
-            PasswordRequirements()
+            PasswordRequirements(viewModel: viewModel)
 
             PasswordInput(fragmentViewModel: viewModel, isTargeted: isInputTargeted)
                 .dropDestination(for: PasswordFragment.self) { fragments, location in
@@ -35,9 +35,21 @@ struct PasswordView: View {
                     .draggable(fragment)
             }
             .frame(maxWidth: .infinity)
+            .dropDestination(for: PasswordFragment.self) { fragments, location in
+                viewModel.removeDroppedFragments(fragments)
+                return false
+            }
 
             Button(action: {
-                print("Confirm password!")
+                
+                let isValid = viewModel.requirements.isValid
+                
+                if isValid {
+                    print("Conseguiu!")
+                } else {
+                    print("meh")
+                }
+                
             }) {
                 Text("Confirm password")
                     .bold()

@@ -9,19 +9,15 @@ import Foundation
 import SwiftUI
 
 struct PasswordRequirements: View {
-    @State var requirements: [Requirement] = [
-        Requirement(type: .more12Char),
-        Requirement(type: .useNumbers),
-        Requirement(type: .useLetters),
-        Requirement(type: .useSpecialChar),
-        Requirement(type: .notUseCommonWords),
-        Requirement(type: .noSequences)
-    ]
-    
+    @ObservedObject var viewModel: PasswordViewModel
+
     var body: some View {
-        WrappedHStack(requirements, horizontalSpacing: 12, verticalSpacing: 12) { model in
+        WrappedHStack(viewModel.requirements.allRequirements, horizontalSpacing: 12, verticalSpacing: 12) { model in
             Text(model.content)
-                .foregroundStyle(Color(.redText))
+                .foregroundStyle(model.isValid ? Color(.green) : Color(.redText))
+                .onAppear {
+                    print(model)
+                }
         }.frame(maxWidth: .infinity)
     }
 }
