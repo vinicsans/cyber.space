@@ -9,7 +9,7 @@ struct PasswordView: View {
     @State private var isInputTargeted = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: 16) {
             Text("To create a password, drag the parts of the desired password into the input field.")
                 .foregroundColor(Color(.text))
 
@@ -60,6 +60,6 @@ struct PasswordView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 16))
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }

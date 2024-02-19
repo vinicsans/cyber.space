@@ -12,7 +12,7 @@ struct PasswordRequirements: View {
     @ObservedObject var viewModel: PasswordViewModel
 
     var body: some View {
-        WrappedHStack(viewModel.requirements.allRequirements, horizontalSpacing: 12, verticalSpacing: 12) { model in
+        WrappedHStack(viewModel.requirements.allRequirements, horizontalSpacing: 8, verticalSpacing: 8) { model in
             Text(model.content)
                 .foregroundStyle(model.isValid ? Color(.green) : Color(.redText))
                 .onAppear {

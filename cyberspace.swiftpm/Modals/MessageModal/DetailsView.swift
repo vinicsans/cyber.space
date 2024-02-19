@@ -14,7 +14,7 @@ struct MessageDetailsView: View {
     
     var body: some View {
 
-        VStack (alignment: .leading) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(.init(message.content))
             
             Spacer()
@@ -28,6 +28,36 @@ struct MessageDetailsView: View {
                 Text("Enviado hoje")
                     .font(.system(size: 16, design: .monospaced))
             }
+            
+            Spacer()
+            
+            HStack(spacing: 8) {
+                Button(action: {
+                    
+                }, label: {
+                    Text("Decline")
+                        .padding(12)
+                        .foregroundStyle(Color(.text))
+                        .frame(maxWidth: .infinity)
+                        .background(Color(.redButton))
+                        .bold()
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                })
+                
+                Spacer()
+                
+                Button(action: {
+                    
+                }, label: {
+                    Text("Accept")
+                        .padding(12)
+                        .foregroundStyle(Color(.modalBackground))
+                        .frame(maxWidth: .infinity)
+                        .background(Color(.green))
+                        .bold()
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                })
+            }.frame(width: .infinity)
         }
         .padding(EdgeInsets(top: 0, leading: 24, bottom: 24, trailing: 24))
         .navigationTitle("Message from \(message.authorName)")

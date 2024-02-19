@@ -59,10 +59,7 @@ class MessageManager: ObservableObject {
       
       **Use a firewall:** A firewall acts like a shield for your spaceship in the digital world, monitoring and blocking unauthorized access. This helps prevent attacks like DDoS, which overload your system with fake requests.
       
-      *I remember once having problems with bots because of a weak password. Since then, I've learned my lesson and prioritize security. I've also heard about recent cyber attacks in the region.* **Stay vigilant**.
-      
-      Best,
-      Bob 🚀
+      *I remember once having problems with bots because of a weak password. Since then, I've learned my lesson and prioritize security. I've also heard about recent cyber attacks in the region.* **Stay vigilant**. Best, Bob 🚀
       """,
             isRead: false
         )

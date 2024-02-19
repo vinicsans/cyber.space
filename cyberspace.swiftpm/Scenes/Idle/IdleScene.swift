@@ -46,7 +46,7 @@ struct IdleScene: View {
                     Modal<PasswordView>(showModal: $showModal, showClose: false, title: "// RESET ACCESS PASSWORD", content: PasswordView())
                         .preferredColorScheme(.dark)
                 case .phishingAttack:
-                    Text("Resetting password")
+                    AlertModal(showModal: $showModal, alertType: .error, showClose: true)
                 default:
                     UIIdleMenuView(parentViewModel: viewModel)
             
@@ -54,7 +54,7 @@ struct IdleScene: View {
             }
         }        .onAppear {
             let timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
-                viewModel.passwordAttack()
+                viewModel.phishingAttack()
             }
         }
     }
