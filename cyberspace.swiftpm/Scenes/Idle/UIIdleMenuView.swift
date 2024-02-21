@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct UIIdleMenuView: View {
-    @ObservedObject var messageManager = MessageManager()
+    @ObservedObject var messageManager = MessageManager.shared
     
     @State private var showModal = false
     @State private var sheetHeight: CGFloat = .zero

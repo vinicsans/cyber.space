@@ -11,7 +11,7 @@ struct PasswordView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("To create a password, drag the parts of the desired password into the input field.")
-                .foregroundColor(Color(.text))
+                .foregroundColor(Constants.Colors.text)
 
             HighlightedText(text: "Security: \(viewModel.passwordSecurity.content)", highlighted: viewModel.passwordSecurity.content, color: viewModel.passwordColor, size: 16)
 
@@ -27,7 +27,7 @@ struct PasswordView: View {
 
             WrappedHStack(viewModel.undroppedFragments, horizontalSpacing: 12, verticalSpacing: 12) { fragment in
                 Text(fragment.content)
-                    .foregroundColor(.white)
+                    .foregroundColor(Constants.Colors.text)
                     .padding(12)
                     .bold()
                     .background(Color(.purple))
@@ -55,7 +55,7 @@ struct PasswordView: View {
                     .bold()
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.green)
+                    .background(Constants.Colors.green)
                     .foregroundColor(.black)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
             }

@@ -37,9 +37,9 @@ struct MessageDetailsView: View {
                 }, label: {
                     Text("Decline")
                         .padding(12)
-                        .foregroundStyle(Color(.text))
+                        .foregroundStyle(Constants.Colors.text)
                         .frame(maxWidth: .infinity)
-                        .background(Color(.redButton))
+                        .background(Constants.Colors.red)
                         .bold()
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                 })
@@ -51,7 +51,7 @@ struct MessageDetailsView: View {
                 }, label: {
                     Text("Accept")
                         .padding(12)
-                        .foregroundStyle(Color(.modalBackground))
+                        .foregroundStyle(Constants.Colors.green)
                         .frame(maxWidth: .infinity)
                         .background(Color(.green))
                         .bold()

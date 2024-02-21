@@ -10,7 +10,7 @@ struct AlertModal: View {
     
     var alertType: AlertType
     let showClose: Bool
-    
+        
     var title: String {
         switch alertType {
         case .securityInvasion:
@@ -43,7 +43,7 @@ struct AlertModal: View {
     var body: some View {
         ZStack {
             VStack(spacing: 24) {
-                Header(showButton: showClose, title: title) {
+                Header(showButton: showClose, title: title, isAlert: true) {
                     showModal.toggle()
                 }
                     .foregroundStyle(.white)
@@ -64,8 +64,21 @@ struct AlertModal: View {
                     .frame(maxWidth: .infinity)
                     .background(.white.opacity(0.25))
                     .clipShape(RoundedRectangle(cornerRadius: 16))
+                } else {
+                    NavigationLink(destination: 
+                                    BotAttackScene()
+                        .toolbar(.hidden)
+                                   , label: {
+                        Text("Show camera")
+                            .font(.system(size: 18, design: .monospaced))
+                            .foregroundStyle(.white)
+                            .bold()
+                    })
+                    .padding(16)
+                    .frame(maxWidth: .infinity)
+                    .background(.white.opacity(0.25))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
                 }
-            
             }
             .padding(32)
         }

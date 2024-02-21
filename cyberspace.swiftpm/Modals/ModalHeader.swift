@@ -11,13 +11,14 @@ struct Header: View {
     let showButton: Bool
     let title: String
     
+    let isAlert: Bool
     let onCloseAction: () -> Void
     
     var body: some View {
         HStack {
             Text(title)
                 .font(.system(size: 28, weight: .bold, design: .monospaced))
-                .foregroundStyle(Color(.redText))
+                .foregroundStyle(isAlert ? Constants.Colors.redText : Constants.Colors.text)
             
             Spacer()
             

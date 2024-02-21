@@ -78,9 +78,9 @@ class PasswordViewModel: ObservableObject {
     
     var passwordColor: Color {
         switch passwordSecurity.state {
-        case .weak: return Color(.redText)
-        case .medium: return Color(.yellow)
-        case .strong: return Color(.green)
+        case .weak: return Constants.Colors.redText
+        case .medium: return Constants.Colors.orange
+        case .strong: return Constants.Colors.green
         }
     }
     

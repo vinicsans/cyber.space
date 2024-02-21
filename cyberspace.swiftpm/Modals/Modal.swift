@@ -10,7 +10,7 @@ struct Modal<Content: View >: View {
     var body: some View {
         ZStack {
             VStack(spacing: 16) {
-                Header(showButton: showClose, title: title) {
+                Header(showButton: showClose, title: title, isAlert: false) {
                     showModal.toggle()
                 }
                 
@@ -21,7 +21,7 @@ struct Modal<Content: View >: View {
             }
             .padding(32)
         }
-        .background(Color(.modalBackground))
+        .background(Constants.Colors.Modal.blueBackground)
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 25.0))
         .opacity(showModal ? 1 : 0)

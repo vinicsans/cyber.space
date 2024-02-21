@@ -8,12 +8,16 @@ class NextSceneEvent: ObservableObject {
     }
 }
 
-struct IntroductionViews: View {
-    internal let arrayOfViews: [AnyView] = [
-        AnyView(RotateScene()),
-        AnyView(IntroMenuScene()),
-        AnyView(IntroPlanetScene()),
-    ]
+struct IntroScenes: View, GameScene {
+    
+    var nextScene: AnyView
+    
+    internal var arrayOfViews: [AnyView] { 
+        [
+            AnyView(IntroMenuScene()),
+            AnyView(IntroPlanetScene(nextScene: AnyView(IdleScene(messageManager: MessageManager(), viewModel: IdleViewModel())))),
+        ]
+    }
     
     @StateObject private var event = NextSceneEvent()
                     

@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-struct IdleScene: View {
+struct IdleScene: View, GameScene {
+    
+    var nextScene: AnyView = AnyView(Test2View())
+    
     @ObservedObject var messageManager = MessageManager()
 
     @ObservedObject var viewModel = IdleViewModel()
@@ -31,7 +34,7 @@ struct IdleScene: View {
                         .background(.clear)
                     
                     Circle()
-                        .stroke(Color("Green"), lineWidth: 3)
+                        .stroke(Constants.Colors.green, lineWidth: 3)
                         .frame(width: 250, height: 250)
                 }
             }
@@ -39,7 +42,7 @@ struct IdleScene: View {
             VStack {
                 switch viewModel.state {
                 case .botAttack:
-                    Text("Bot Attack")
+                    AlertModal(showModal: $showModal, alertType: .securityInvasion, showClose: false)
                 case .firewallAttack:
                     Text("Logged in")
                 case .passwordAttack:
@@ -54,7 +57,7 @@ struct IdleScene: View {
             }
         }        .onAppear {
             let timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
-                viewModel.phishingAttack()
+                viewModel.botAttack()
             }
         }
     }

@@ -6,6 +6,8 @@ class MessageManager: ObservableObject {
     private var messageToBeAddIndex = 0
     private var timer: Timer?
         
+    public static let shared = MessageManager()
+    
     init() {
         startTimer()
     }
