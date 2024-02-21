@@ -7,11 +7,21 @@
 
 import Foundation
 
-struct Message: Identifiable, Hashable {
+enum MessageType {
+    case intro
+    case trued
+    case fake
+}
+
+struct Message: Identifiable, Equatable {
     let id = UUID()
+    
+    let type: MessageType
     
     let authorEmail: String
     let authorName: String
-    let content: String
     var isRead: Bool
+    let popUp: Bool
+    let isFake: Bool
+    let content: String
 }

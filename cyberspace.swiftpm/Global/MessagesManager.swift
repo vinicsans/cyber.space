@@ -3,6 +3,8 @@ import SwiftUI
 class MessageManager: ObservableObject {
     @Published var messages: [Message] = []
     
+    @Published var showModal: Bool = false
+    
     private var messageToBeAddIndex = 0
     private var timer: Timer?
         
@@ -21,6 +23,22 @@ class MessageManager: ObservableObject {
     private func stopTimer() {
         timer?.invalidate()
         timer = nil
+    }
+    
+    func submitFakeMessage() {
+        
+    }
+    
+    func cancelFakeMessage() {
+        showModal = false
+    }
+    
+    func submitTrueMessage() {
+        
+    }
+    
+    func cancelTrueMessage() {
+        showModal = false
     }
     
     func allMessagesRead() -> Bool {
@@ -44,10 +62,61 @@ class MessageManager: ObservableObject {
         objectWillChange.send()
     }
     
+    func addFakeMessage() {
+        messages.append(fakeMessage)
+        showModal = true
+    }
+    
+    func addTrueMessage() {
+        messages.append(trueMessage)
+        showModal = true
+    }
+    
+    private let trueMessage: Message = Message(
+        type: .trued,
+        authorEmail: "bob@starship.com",
+        authorName: "Bob",
+        isRead: false,
+        popUp: true,
+        isFake: false,
+        content: """
+        Hi Michael,
+
+        I have been receiving information about possible phishing attempts in the region you are in. It is crucial to remain vigilant against potential cyber threats.
+
+        Please confirm your identity by providing your ship ID number. This will help us ensure that only you are actually responding to this message. Additionally, beware of fake emails that may come to you, always check the name, spelling errors, and if the email address ends with @starship.com, okay?
+
+        Intergalactic hugs, Bob. 🚀
+        """)
+    
+    private let fakeMessage: Message = Message(
+        type: .fake,
+        authorEmail: "suspect@protonni.su",
+        authorName: "???&¨#$@!",
+        isRead: false,
+        popUp: true,
+        isFake: true,
+        content: """
+        Hi Michel,.,
+
+        We are experienceing unexpected technical issues with our security system and require your immediate assistance to avoid serious complications!!!
+
+        To resolve this urgent situation, we kindly request that you provide us with the access password for your ship.
+
+        We apologize for the inconvieniente, but your cooperation is essential to maintain the integrity of the system. We appreciate your prompt action.
+
+        Sincerely,
+        Martian Technical Support
+        """)
+    
     private let messagesToBeAdded: [Message] = [
         Message(
+            type: .intro,
             authorEmail: "bob@starship.com",
             authorName: "Bob",
+            isRead: false,
+            popUp: true,
+            isFake: false,
             content: """
       Hi Michael! 👋
       
@@ -62,8 +131,7 @@ class MessageManager: ObservableObject {
       **Use a firewall:** A firewall acts like a shield for your spaceship in the digital world, monitoring and blocking unauthorized access. This helps prevent attacks like DDoS, which overload your system with fake requests.
       
       *I remember once having problems with bots because of a weak password. Since then, I've learned my lesson and prioritize security. I've also heard about recent cyber attacks in the region.* **Stay vigilant**. Best, Bob 🚀
-      """,
-            isRead: false
-        )
+      """
+        ),
     ]
 }

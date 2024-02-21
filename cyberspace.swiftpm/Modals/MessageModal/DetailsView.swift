@@ -11,6 +11,7 @@ struct MessageDetailsView: View {
     var message: Message
     
     @Environment(\.presentationMode) var presentationMode
+    @State var messageManager: MessageManager
     
     var body: some View {
 
@@ -30,34 +31,72 @@ struct MessageDetailsView: View {
             }
             
             Spacer()
+
+            switch message.type {
+            case .trued:
+                HStack(spacing: 8) {
+                    Button(action: {
+                        messageManager.submitTrueMessage()
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Text("Decline")
+                            .padding(12)
+                            .foregroundStyle(Constants.Colors.text)
+                            .frame(maxWidth: .infinity)
+                            .background(Constants.Colors.red)
+                            .bold()
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                    })
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        messageManager.cancelTrueMessage()
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Text("Accept")
+                            .padding(12)
+                            .foregroundStyle(Constants.Colors.text)
+                            .frame(maxWidth: .infinity)
+                            .background(Constants.Colors.green)
+                            .bold()
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                    })
+                }.frame(width: .infinity)
+            case .fake:
+                HStack(spacing: 8) {
+                    Button(action: {
+                        messageManager.cancelFakeMessage()
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Text("Decline")
+                            .padding(12)
+                            .foregroundStyle(Constants.Colors.text)
+                            .frame(maxWidth: .infinity)
+                            .background(Constants.Colors.red)
+                            .bold()
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                    })
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        messageManager.submitFakeMessage()
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Text("Accept")
+                            .padding(12)
+                            .foregroundStyle(.black)
+                            .frame(maxWidth: .infinity)
+                            .background(Constants.Colors.green)
+                            .bold()
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                    })
+                }.frame(width: .infinity)
+            case .intro:
+                EmptyView()
+            }
             
-            HStack(spacing: 8) {
-                Button(action: {
-                    
-                }, label: {
-                    Text("Decline")
-                        .padding(12)
-                        .foregroundStyle(Constants.Colors.text)
-                        .frame(maxWidth: .infinity)
-                        .background(Constants.Colors.red)
-                        .bold()
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                })
-                
-                Spacer()
-                
-                Button(action: {
-                    
-                }, label: {
-                    Text("Accept")
-                        .padding(12)
-                        .foregroundStyle(Constants.Colors.green)
-                        .frame(maxWidth: .infinity)
-                        .background(Color(.green))
-                        .bold()
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                })
-            }.frame(width: .infinity)
         }
         .padding(EdgeInsets(top: 0, leading: 24, bottom: 24, trailing: 24))
         .navigationTitle("Message from \(message.authorName)")
@@ -72,9 +111,9 @@ struct MessageDetailsView: View {
                     .clipShape(Circle())
             })
         }
+        .onAppear {
+            let index = self.messageManager.messages.firstIndex(of: message)!
+            MessageManager.shared.messages[index].isRead = true
+        }
     }
-}
-
-#Preview {
-    MessageDetailsView(message: Message(authorEmail: "webVinic", authorName: "Hello", content: "**Hello**, michel.", isRead: false))
 }

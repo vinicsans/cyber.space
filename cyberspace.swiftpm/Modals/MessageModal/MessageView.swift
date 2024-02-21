@@ -10,8 +10,9 @@ struct MessageView: View {
     var body: some View {
         NavigationView {
             List(messageManager.messages) { item in
-                NavigationLink(destination: MessageDetailsView(message: item), label: {
+                NavigationLink(destination: MessageDetailsView(message: item, messageManager: messageManager), label: {
                     MessageLineRow(message: item)
+                        .frame(height: 48)
                 })
             }
             .navigationTitle("E-mails")

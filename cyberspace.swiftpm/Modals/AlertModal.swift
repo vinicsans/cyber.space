@@ -8,8 +8,12 @@ enum AlertType {
 struct AlertModal: View {
     @Binding var showModal: Bool
     
+    @State var showedCamera: Bool = false
+    
     var alertType: AlertType
     let showClose: Bool
+    
+    let onClick: () -> Void
         
     var title: String {
         switch alertType {
@@ -65,19 +69,35 @@ struct AlertModal: View {
                     .background(.white.opacity(0.25))
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                 } else {
-                    NavigationLink(destination: 
-                                    BotAttackScene()
-                        .toolbar(.hidden)
-                                   , label: {
-                        Text("Show camera")
-                            .font(.system(size: 18, design: .monospaced))
-                            .foregroundStyle(.white)
-                            .bold()
-                    })
-                    .padding(16)
-                    .frame(maxWidth: .infinity)
-                    .background(.white.opacity(0.25))
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    
+                    if !showedCamera {
+                        NavigationLink(destination:
+                                        BotAttackScene()
+                            .toolbar(.hidden)
+                                       , label: {
+                                Text("Show in camera")
+                                    .font(.system(size: 18, design: .monospaced))
+                                    .foregroundStyle(.white)
+                                    .bold()
+                            })
+                        .padding(16)
+                        .frame(maxWidth: .infinity)
+                        .background(.white.opacity(0.25))
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                    } else {
+                            Button(action: {
+                                onClick()
+                            }, label: {
+                                Text("Reset password")
+                                    .font(.system(size: 18, design: .monospaced))
+                                    .foregroundStyle(.white)
+                                    .bold()
+                            })
+                        .padding(16)
+                        .frame(maxWidth: .infinity)
+                        .background(.white.opacity(0.25))
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                    }
                 }
             }
             .padding(32)
@@ -92,6 +112,9 @@ struct AlertModal: View {
                     .stroke(.white, lineWidth: 2)
         )
         .frame(maxWidth: 700, maxHeight: .infinity)
+        .onDisappear {
+            showedCamera = true
+        }
     }
     
 }

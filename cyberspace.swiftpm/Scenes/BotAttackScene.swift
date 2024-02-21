@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct BotAttackScene: View, GameScene {
+struct BotAttackScene: View {
     private let starsBackgroundImage = Image("stars")
     private let spaceShipAttackImage = Image("spaceship_attack")
     
-    var nextScene: AnyView = AnyView(IdleScene(nextScene: AnyView(Test2View()), messageManager: MessageManager(), viewModel: IdleViewModel()))
-    
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         ZStack {
             starsBackgroundImage
@@ -19,6 +19,7 @@ struct BotAttackScene: View, GameScene {
                 .scaledToFill()
                 .aspectRatio(contentMode: .fill)
                 .edgesIgnoringSafeArea(.all)
+            
             VStack {
                 HStack {
                     Text("Robots are trying to hack into the ship's access system!")
@@ -29,9 +30,28 @@ struct BotAttackScene: View, GameScene {
                     
                     Spacer()
                 }
-                .padding(64)
+                .padding(EdgeInsets(top: 64, leading: 32, bottom: 0, trailing: 0))
                 
                 Spacer()
+                
+                HStack {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Text("Back to the ship")
+                            .font(.title)
+                            .bold()
+                            .foregroundStyle(.white)
+                    })
+                    .padding(24)
+                    .background(.ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                    .padding(EdgeInsets(top: 0, leading: 32, bottom: 64, trailing: 0))
+
+                    
+                    Spacer()
+                }
+                
             }
         }
         .ignoresSafeArea()

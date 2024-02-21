@@ -3,16 +3,15 @@ import SwiftUI
 struct UIIdleMenuView: View {
     @ObservedObject var messageManager = MessageManager.shared
     
-    @State private var showModal = false
     @State private var sheetHeight: CGFloat = .zero
     
     private var spaceshipID: String = "322883133"
     private var cyberpointCount: Int = 0
     private var hasUnreadMessages: Bool { messageManager.allMessagesRead() }
-    
+        
     @ObservedObject var parentViewModel: IdleViewModel
 
-    init(parentViewModel: IdleViewModel) {
+    init(parentViewModel: IdleViewModel  ) {
         self.parentViewModel = parentViewModel
     }
         
@@ -39,7 +38,7 @@ struct UIIdleMenuView: View {
                 
                 Spacer()
                 
-                Button { showModal = true } label: {
+                Button { messageManager.showModal = true } label: {
                     hasUnreadMessages ? Image(systemName: "envelope.badge.fill") : Image(systemName: "envelope.fill")
                 }
                 .foregroundStyle(Color("Text"))
@@ -47,9 +46,13 @@ struct UIIdleMenuView: View {
             }
         }
         .padding(64)
-        .sheet(isPresented: $showModal) {
+        .sheet(isPresented: $messageManager.showModal) {
             MessageView(messageManager: messageManager)
                 .preferredColorScheme(.dark)
+                .onDisappear {
+                    parentViewModel.nextEvent(.homeIdle, withTimer: true)
+                }
+
         }
         .overlay {
             GeometryReader { geometry in

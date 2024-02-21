@@ -15,7 +15,7 @@ struct IntroScenes: View, GameScene {
     internal var arrayOfViews: [AnyView] { 
         [
             AnyView(IntroMenuScene()),
-            AnyView(IntroPlanetScene(nextScene: AnyView(IdleScene(messageManager: MessageManager(), viewModel: IdleViewModel())))),
+            AnyView(IntroPlanetScene(nextScene: AnyView(IdleScene()))),
         ]
     }
     

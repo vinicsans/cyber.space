@@ -85,32 +85,53 @@ class PasswordViewModel: ObservableObject {
     }
     
     private func calculatePasswordScore(_ password: String) -> PasswordScore {
-        let length = password.count
-        requirements.isMinimumLengthMet.isValid = length >= 12
-        requirements.hasLetters.isValid = password.contains(try! Regex("[a-zA-Z]")) ? true : false
-        
-        if isLowercase(password) && isUppercase(password) {
-            requirements.hasLowerAndUppercase.isValid = true
-        }
-        
-        requirements.hasNumbers.isValid = hasNumbers(password)
-        requirements.hasSpecialCharacters.isValid = hasSpecialCharacters(password)
-        requirements.isNotCommonPassword.isValid = !isCommonPassword(password)
-        
-        if !requirements.isMinimumLengthMet.isValid {
-            return .weak
-        } else if requirements.hasLowerAndUppercase.isValid {
-            return .medium
-        } else if !requirements.hasNumbers.isValid {
-            return .medium
-        } else if !requirements.isNotCommonPassword.isValid {
-            return .medium
-        } else if requirements.hasSpecialCharacters.isValid {
-            return .strong
-        } else {
-            return .strong
-        }
+      let length = password.count
+      requirements.isMinimumLengthMet.isValid = length >= 12
+
+      // Verificação aprimorada de letras
+      let hasLetters = password.range(of: "[a-zA-Z]", options: .regularExpression) != nil
+      requirements.hasLetters.isValid = hasLetters
+
+      if hasLetters {
+        // Verificação de letras maiúsculas e minúsculas
+        let hasLowercase = password.lowercased() != password
+        let hasUppercase = password.uppercased() != password
+        requirements.hasLowerAndUppercase.isValid = hasLowercase && hasUppercase
+      }
+
+      // Verificação aprimorada de números
+      let hasNumbers = password.range(of: "[0-9]", options: .regularExpression) != nil
+      requirements.hasNumbers.isValid = hasNumbers
+
+      // Verificação aprimorada de caracteres especiais
+      let hasSpecialCharacters = password.range(of: "[,.!?;:@^]", options: .regularExpression) != nil
+      requirements.hasSpecialCharacters.isValid = hasSpecialCharacters
+
+      // Verificação aprimorada de senhas comuns
+      requirements.isNotCommonPassword.isValid = !isCommonPassword(password)
+
+      // Cálculo da pontuação ponderada
+      var score = 0
+      if requirements.hasLetters.isValid { score += 2 }
+      if requirements.hasLowerAndUppercase.isValid { score += 2 }
+      if requirements.hasNumbers.isValid { score += 2 }
+      if requirements.hasSpecialCharacters.isValid { score += 2 }
+      if requirements.isMinimumLengthMet.isValid { score += 1 }
+      if requirements.isNotCommonPassword.isValid { score += 1 }
+
+      // Definição da pontuação final
+      switch score {
+      case 0...3:
+        return .weak
+      case 4...6:
+        return .medium
+      case 7...8:
+        return .strong
+      default:
+        return .strong
+      }
     }
+
     
     private func updatePasswordRequirements() {
         passwordSecurity.state = checkPasswordStrength(password)
@@ -133,7 +154,7 @@ extension PasswordViewModel {
     }
     
     private func hasSpecialCharacters(_ password: String) -> Bool {
-        password.range(of: "[,.!?;:@ ^]", options: .regularExpression) != nil
+        password.range(of: "[,.!?;:@^]", options: .regularExpression) != nil
     }
     
     private func isCommonPassword(_ password: String) -> Bool {

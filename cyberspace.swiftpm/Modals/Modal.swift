@@ -26,10 +26,6 @@ struct Modal<Content: View >: View {
         .clipShape(RoundedRectangle(cornerRadius: 25.0))
         .opacity(showModal ? 1 : 0)
         .animation(.easeIn, value: showModal)
-        .overlay(
-            RoundedRectangle(cornerRadius: 25)
-                    .stroke(.white, lineWidth: 2)
-        )
         .frame(maxWidth: 886, maxHeight: .infinity)
     }
 }

@@ -5,7 +5,11 @@ import SwiftUI
 
 struct PasswordView: View {
 
+    @StateObject var scoreManager: ScoreManager
     @StateObject var viewModel = PasswordViewModel()
+    
+    let onCloseAction: () -> Void
+    
     @State private var isInputTargeted = false
 
     var body: some View {
@@ -20,6 +24,16 @@ struct PasswordView: View {
             PasswordInput(fragmentViewModel: viewModel, isTargeted: isInputTargeted)
                 .dropDestination(for: PasswordFragment.self) { fragments, location in
                     viewModel.addDroppedFragments(fragments)
+                    
+                    switch viewModel.passwordSecurity.state {
+                    case .weak:
+                        print("error")
+                    case .medium:
+                        scoreManager.addPoints(bonus: .average)
+                    case .strong:
+                        scoreManager.addPoints(bonus: .very)
+                    }                    
+                    
                     return true
                 } isTargeted: { isTarget in
                     isInputTargeted = isTarget
@@ -39,17 +53,9 @@ struct PasswordView: View {
                 viewModel.removeDroppedFragments(fragments)
                 return false
             }
-
+                        
             Button(action: {
-                
-                let isValid = viewModel.requirements.isValid
-                
-                if isValid {
-                    print("Conseguiu!")
-                } else {
-                    print("meh")
-                }
-                
+                onCloseAction()
             }) {
                 Text("Confirm password")
                     .bold()

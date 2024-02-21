@@ -15,6 +15,7 @@ struct MessageLineRow: View {
         HStack {
             if message.isRead == true {
                 Text("\(message.authorName): \(message.content)")
+                    .lineLimit(1)
             } else {
                 Text("Nova mensagem de \(message.authorName)")
                     .bold()
@@ -24,6 +25,7 @@ struct MessageLineRow: View {
                 MessagePin()
             }
         }
+
     }
 }
 

@@ -12,10 +12,15 @@ struct IdleScene: View, GameScene {
     var nextScene: AnyView = AnyView(Test2View())
     
     @ObservedObject var messageManager = MessageManager()
-
+    @ObservedObject var scoreManager = ScoreManager()
     @ObservedObject var viewModel = IdleViewModel()
-    @State private var showModal = true
-
+    
+    @State var homeIdle = true
+    
+    private var showModal: Binding<Bool> {
+        $viewModel.showModalInAction
+    }
+    
     private let starsBackgroundImage = Image("stars")
     
     var body: some View {
@@ -38,26 +43,42 @@ struct IdleScene: View, GameScene {
                         .frame(width: 250, height: 250)
                 }
             }
-            
+
             VStack {
                 switch viewModel.state {
+                    
                 case .botAttack:
-                    AlertModal(showModal: $showModal, alertType: .securityInvasion, showClose: false)
+                    AlertModal(showModal: $viewModel.showModalInAction, alertType: .securityInvasion, showClose: false, onClick: {
+                        viewModel.nextEvent(viewModel.state, withTimer: false)
+                    })
                 case .firewallAttack:
                     Text("Logged in")
+                    
                 case .passwordAttack:
-                    Modal<PasswordView>(showModal: $showModal, showClose: false, title: "// RESET ACCESS PASSWORD", content: PasswordView())
-                        .preferredColorScheme(.dark)
+                    Modal(showModal: showModal,
+                          showClose: false,
+                          title: "// RESET PASSWORD",
+                          content: PasswordView(scoreManager: scoreManager, onCloseAction: { viewModel.nextEvent(.passwordAttack, withTimer: false) })
+                    )
+                    
                 case .phishingAttack:
-                    AlertModal(showModal: $showModal, alertType: .error, showClose: true)
-                default:
                     UIIdleMenuView(parentViewModel: viewModel)
-            
+                    .onAppear {
+                        MessageManager.shared.addTrueMessage()
+                        MessageManager.shared.addFakeMessage()
+                    }
+                case .idle:
+                    UIIdleMenuView(parentViewModel: viewModel)
+                        .onAppear {
+                                viewModel.nextEvent(.idle, withTimer: true)
+                        }
+                    
+                case .homeIdle:
+                    UIIdleMenuView(parentViewModel: viewModel)
+                        .onDisappear {
+                            viewModel.nextEvent(.homeIdle, withTimer: true)
+                        }
                 }
-            }
-        }        .onAppear {
-            let timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
-                viewModel.botAttack()
             }
         }
     }
