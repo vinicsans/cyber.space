@@ -7,7 +7,7 @@ enum MainState {
     case botAttack
     case passwordAttack
     case phishingAttack
-    case firewallAttack
+    case finishModal
 }
 
 class IdleViewModel: ObservableObject {
@@ -22,7 +22,7 @@ class IdleViewModel: ObservableObject {
         MainState.passwordAttack,
         MainState.idle,
         MainState.phishingAttack,
-        MainState.firewallAttack
+        MainState.finishModal
     ]
     
     func nextEvent(_ actualScene: MainState, withTimer: Bool) {
@@ -51,8 +51,8 @@ class IdleViewModel: ObservableObject {
         state = .phishingAttack
     }
     
-    func firewallAttack() {
-        state = .firewallAttack
+    func finishModal() {
+        state = .finishModal
     }
     
     func idle() {

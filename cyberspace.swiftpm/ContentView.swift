@@ -5,7 +5,7 @@ struct ContentView: View {
                     
     var body: some View {
         NavigationStack {
-            IntroScenes(nextScene: AnyView(Test()))
+            IntroScenes()
         }
         .toolbar(.hidden)
     }

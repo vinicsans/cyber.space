@@ -16,7 +16,7 @@ struct IdleScene: View, GameScene {
     @ObservedObject var viewModel = IdleViewModel()
     
     @State var homeIdle = true
-    
+        
     @State private var rotation: Double = 0.0
     
     private var showModal: Binding<Bool> {
@@ -54,9 +54,6 @@ struct IdleScene: View, GameScene {
                     AlertModal(showModal: $viewModel.showModalInAction, alertType: .securityInvasion, showClose: false, onClick: {
                         viewModel.nextEvent(viewModel.state, withTimer: false)
                     })
-                case .firewallAttack:
-                    Text("Logged in")
-                    
                 case .passwordAttack:
                     Modal(showModal: showModal,
                           showClose: false,
@@ -65,16 +62,18 @@ struct IdleScene: View, GameScene {
                     )
                     
                 case .phishingAttack:
-                    UIIdleMenuView(parentViewModel: viewModel, scoreManager: self.scoreManager, messageManager: messageManager, state: .message)
+                    UIIdleMenuView(parentViewModel: viewModel, scoreManager: self.scoreManager, messageManager: messageManager, state: .message, isErrorMode: false)
                     .onAppear {
                         messageManager.addTrueMessage()
                         messageManager.addFakeMessage()
                     }
                 case .idle:
-                    UIIdleMenuView(parentViewModel: viewModel, scoreManager: self.scoreManager, messageManager: messageManager, state: .idle)
+                    UIIdleMenuView(parentViewModel: viewModel, scoreManager: self.scoreManager, messageManager: messageManager, state: .idle, isErrorMode: false)
                     
                 case .homeIdle:
-                    UIIdleMenuView(parentViewModel: viewModel, scoreManager: self.scoreManager, messageManager: messageManager, state: .homeIdle)
+                    UIIdleMenuView(parentViewModel: viewModel, scoreManager: self.scoreManager, messageManager: messageManager, state: .homeIdle, isErrorMode: false)
+                case .finishModal:
+                    Modal(showModal: showModal, showClose: false, title: "Congratulations, the trip was a success!", content: FinishModalView())
                 }
             }
         }

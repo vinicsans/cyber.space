@@ -68,7 +68,11 @@ class PasswordViewModel: ObservableObject {
     func removeDroppedFragments(_ fragments: [PasswordFragment]) {
         for fragment in fragments {
             droppedFragments.removeAll(where: { $0 == fragment })
-            password += fragments.map(\.content).joined()
+            
+            let rangeToRemove = password.range(of: fragment.content)
+            if let range = rangeToRemove {
+              password.removeSubrange(range)
+            }
         }
         undroppedFragments.append(contentsOf: fragments)
         updatePasswordRequirements()
@@ -85,6 +89,16 @@ class PasswordViewModel: ObservableObject {
     }
     
     private func calculatePasswordScore(_ password: String) -> PasswordScore {
+        
+        if password.isEmpty {
+            requirements.hasLetters.isValid = false
+            requirements.hasLowerAndUppercase.isValid = false
+            requirements.hasNumbers.isValid = false
+            requirements.hasSpecialCharacters.isValid = false
+            requirements.isMinimumLengthMet.isValid = false
+            requirements.isNotCommonPassword.isValid = false
+        }
+        
       let length = password.count
       requirements.isMinimumLengthMet.isValid = length >= 12
 

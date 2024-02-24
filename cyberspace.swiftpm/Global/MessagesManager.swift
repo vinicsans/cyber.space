@@ -7,6 +7,8 @@ class MessageManager: ObservableObject {
         
     @Published var hasUnreadMessages: Bool = false
     
+    private var scoreManager = ScoreManager.shared
+    
     private var messageToBeAddIndex = 0
     private var timer: Timer?
         
@@ -29,17 +31,18 @@ class MessageManager: ObservableObject {
         timer = nil
     }
     
+    func cancelFakeMessage() {
+        showModal = false
+        allMessagesRead()
+        scoreManager.addPoints(bonus: .very)
+    }
+    
     func submitFakeMessage() {
         
     }
     
-    func cancelFakeMessage() {
-        showModal = false
-        allMessagesRead()
-    }
-    
     func submitTrueMessage() {
-        
+       
     }
     
     func cancelTrueMessage() {

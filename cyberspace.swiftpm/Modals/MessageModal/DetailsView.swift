@@ -11,7 +11,10 @@ struct MessageDetailsView: View {
     var message: Message
     
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var messageManager: MessageManager
+    @ObservedObject var messageManager = MessageManager.shared
+    
+    @State var showFullscreen: Bool = false
+    
 
     var body: some View {
 
@@ -37,7 +40,7 @@ struct MessageDetailsView: View {
                 HStack(spacing: 8) {
                     Button(action: {
                         messageManager.submitTrueMessage()
-                        presentationMode.wrappedValue.dismiss()
+                        messageManager.showModal = false
                     }, label: {
                         Text("Decline")
                             .padding(12)
@@ -52,7 +55,7 @@ struct MessageDetailsView: View {
                     
                     Button(action: {
                         messageManager.cancelTrueMessage()
-                        presentationMode.wrappedValue.dismiss()
+                        messageManager.showModal = false
                     }, label: {
                         Text("Accept")
                             .padding(12)
@@ -67,7 +70,7 @@ struct MessageDetailsView: View {
                 HStack(spacing: 8) {
                     Button(action: {
                         messageManager.cancelFakeMessage()
-                        presentationMode.wrappedValue.dismiss()
+                        messageManager.showModal = false
                     }, label: {
                         Text("Decline")
                             .padding(12)
@@ -81,8 +84,7 @@ struct MessageDetailsView: View {
                     Spacer()
                     
                     Button(action: {
-                        messageManager.submitFakeMessage()
-                        presentationMode.wrappedValue.dismiss()
+                        showFullscreen = true
                     }, label: {
                         Text("Accept")
                             .padding(12)
@@ -92,6 +94,8 @@ struct MessageDetailsView: View {
                             .bold()
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                     })
+                    .fullScreenCover(isPresented: $showFullscreen, content: GameOverView.init)
+
                 }.frame(width: .infinity)
             case .intro:
                 EmptyView()
@@ -102,7 +106,8 @@ struct MessageDetailsView: View {
         .navigationTitle("Message from \(message.authorName)")
         .toolbar {
             Button(action: {
-                presentationMode.wrappedValue.dismiss()
+                messageManager.allMessagesRead()
+                messageManager.showModal = false
             }, label: {
                 Image(systemName: "xmark")
                     .font(.system(size: 16))

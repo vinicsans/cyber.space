@@ -10,6 +10,7 @@ struct PasswordInput: View {
             if fragmentViewModel.droppedFragments.count > 0 {
                 WrappedHStack(fragmentViewModel.droppedFragments, horizontalSpacing: 6, verticalSpacing: 6) { fragment in
                     FragmentView(fragment: fragment)
+                        .draggable(fragment)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(24)

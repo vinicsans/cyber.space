@@ -18,7 +18,7 @@ struct Header: View {
         HStack {
             Text(title)
                 .font(.system(size: 28, weight: .bold, design: .monospaced))
-                .foregroundStyle(isAlert ? Constants.Colors.redText : Constants.Colors.text)
+                .foregroundStyle(isAlert ? Constants.Colors.redText : Constants.Colors.green)
             
             Spacer()
             

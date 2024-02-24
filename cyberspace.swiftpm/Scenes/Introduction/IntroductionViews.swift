@@ -8,10 +8,8 @@ class NextSceneEvent: ObservableObject {
     }
 }
 
-struct IntroScenes: View, GameScene {
-    
-    var nextScene: AnyView
-    
+struct IntroScenes: View {
+        
     internal var arrayOfViews: [AnyView] { 
         [
             AnyView(IntroMenuScene()),

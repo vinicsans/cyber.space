@@ -7,6 +7,8 @@ struct MessageView: View {
     @State private var showModal = false
     @Environment(\.presentationMode) var presentationMode
     
+    var onCloseAction: () -> Void
+    
     var body: some View {
         NavigationView {
             List(messageManager.messages) { item in
@@ -19,7 +21,7 @@ struct MessageView: View {
             .toolbar {
                 Button(action: {
                     messageManager.allMessagesRead()
-                    presentationMode.wrappedValue.dismiss()
+                    messageManager.showModal = false
                 }, label: {
                     Image(systemName: "xmark")
                         .font(.system(size: 16))
@@ -34,5 +36,5 @@ struct MessageView: View {
 
 
 #Preview {
-    MessageView(messageManager: MessageManager())
+    MessageView(messageManager: MessageManager(), onCloseAction: {})
 }

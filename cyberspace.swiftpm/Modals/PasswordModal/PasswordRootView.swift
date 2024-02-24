@@ -51,9 +51,20 @@ struct PasswordView: View {
             .frame(maxWidth: .infinity)
             .dropDestination(for: PasswordFragment.self) { fragments, location in
                 viewModel.removeDroppedFragments(fragments)
-                return false
+                                
+                switch viewModel.passwordSecurity.state {
+                case .weak:
+                    print("error")
+                case .medium:
+                    scoreManager.addPoints(bonus: .average)
+                case .strong:
+                    scoreManager.addPoints(bonus: .very)
+                }
+                
+                return true
+            } isTargeted: { isTarget in
+                isInputTargeted = isTarget
             }
-                        
             Button(action: {
                 onCloseAction()
             }) {

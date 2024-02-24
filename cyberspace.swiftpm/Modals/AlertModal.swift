@@ -58,9 +58,9 @@ struct AlertModal: View {
                     .foregroundStyle(.white)
                 
                 if alertType == .error {
-                    Button(action: {}, label: {
+                    NavigationLink(destination: IntroScenes(), label: {
                         Text("Start again")
-                            .font(.system(size: 18, design: .monospaced))
+                            .font(.system(size: 16, design: .monospaced))
                             .foregroundStyle(.white)
                             .bold()
                     })
