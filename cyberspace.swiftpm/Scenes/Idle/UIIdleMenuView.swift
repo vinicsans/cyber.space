@@ -109,20 +109,6 @@ struct UIIdleMenuView: View {
                     .preferredColorScheme(.dark)
                     .onDisappear {
                         messageManager.allMessagesRead()
-                        
-                        if !messageManager.hasUnreadMessages {
-                            print(messageManager.hasUnreadMessages)
-                            
-                            switch state {
-                            case .message:
-                                parentViewModel.nextEvent(.phishingAttack, withTimer: true)
-                            case .homeIdle:
-                                parentViewModel.nextEvent(.homeIdle, withTimer: true)
-                            case .idle:
-                                parentViewModel.nextEvent(.idle, withTimer: true)
-                                
-                            }
-                        }
                     }
                     .overlay {
                         GeometryReader { geometry in
@@ -133,6 +119,23 @@ struct UIIdleMenuView: View {
                         sheetHeight = newHeight
                     }
                     .presentationDetents([.height(sheetHeight)])
+                    .onDisappear {  
+                        if !messageManager.hasUnreadMessages {
+                            print(messageManager.hasUnreadMessages)
+
+                            switch state {
+                            case .message:
+                                if messageManager.fakeMessageAction && messageManager.trueMessageAction {
+                                    parentViewModel.nextEvent(.phishingAttack, withTimer: true)
+                                }
+                            case .homeIdle:
+                                parentViewModel.nextEvent(.homeIdle, withTimer: true)
+                            case .idle:
+                                parentViewModel.nextEvent(.idle, withTimer: true)
+                                
+                            }
+                        }
+                    }
             }
         }
     }

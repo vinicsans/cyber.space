@@ -9,6 +9,9 @@ class MessageManager: ObservableObject {
     
     private var scoreManager = ScoreManager.shared
     
+    @Published var fakeMessageAction: Bool = false
+    @Published var trueMessageAction: Bool = false
+    
     private var messageToBeAddIndex = 0
     private var timer: Timer?
         
@@ -35,19 +38,22 @@ class MessageManager: ObservableObject {
         showModal = false
         allMessagesRead()
         scoreManager.addPoints(bonus: .very)
+        fakeMessageAction = true
     }
     
     func submitFakeMessage() {
-        
+        fakeMessageAction = true
     }
     
     func submitTrueMessage() {
-       
+        trueMessageAction = true
     }
     
     func cancelTrueMessage() {
         showModal = false
         allMessagesRead()
+        trueMessageAction = true
+
     }
     
     func allMessagesRead() -> Void {
@@ -76,7 +82,11 @@ class MessageManager: ObservableObject {
     }
     
     func addFakeMessage() {
-        messages.append(fakeMessage)
+        let timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { [self] timer in
+            messages.append(fakeMessage)
+        }
+        
+        
         showModal = true
         allMessagesRead()
     }

@@ -1,4 +1,5 @@
 import SwiftUI
+import AVFoundation
 
 class NextSceneEvent: ObservableObject {
     @Published var actualScene: Int = 0
@@ -9,6 +10,8 @@ class NextSceneEvent: ObservableObject {
 }
 
 struct IntroScenes: View {
+    
+    @State private var player: AVAudioPlayer?
         
     internal var arrayOfViews: [AnyView] { 
         [
@@ -32,7 +35,11 @@ struct IntroScenes: View {
         }
         .toolbar(.hidden)
             .onAppear {
-                print(arrayOfViews.count - 1)
+                let url = URL(fileURLWithPath: Bundle.main.path(forResource: "music", ofType: "mp3")!)
+                player = try? AVAudioPlayer(contentsOf: url)
+                
+                player?.numberOfLoops = -1
+                player?.play()
             }
     }
 }
