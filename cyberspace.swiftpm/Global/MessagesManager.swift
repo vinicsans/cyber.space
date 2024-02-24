@@ -47,6 +47,7 @@ class MessageManager: ObservableObject {
     
     func submitTrueMessage() {
         trueMessageAction = true
+        scoreManager.addPoints(bonus: .very)
     }
     
     func cancelTrueMessage() {

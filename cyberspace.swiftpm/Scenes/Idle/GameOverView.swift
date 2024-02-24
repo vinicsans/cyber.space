@@ -15,7 +15,6 @@ struct GameOverView: View {
     
     var body: some View {
         ZStack {
-            
             starsBackgroundImage
                 .resizable()
                 .scaledToFill()

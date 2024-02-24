@@ -12,7 +12,7 @@ struct IdleScene: View, GameScene {
     var nextScene: AnyView = AnyView(Test2View())
     
     @ObservedObject var messageManager = MessageManager()
-    @ObservedObject var scoreManager = ScoreManager()
+    @ObservedObject var scoreManager = ScoreManager.shared
     @ObservedObject var viewModel = IdleViewModel()
     
     @State var homeIdle = true

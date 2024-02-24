@@ -19,7 +19,7 @@ class ScoreManager: ObservableObject {
     public static let shared = ScoreManager()
     
     private let featuresAmount = 3
-    private let pointsAtFeature = 100 / 4
+    private let pointsAtFeature = 100 / 3
     
     public func addPoints(bonus: Bonus) {
         var featurePoints = pointsAtFeature
