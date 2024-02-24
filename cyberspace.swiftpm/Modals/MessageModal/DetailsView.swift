@@ -11,8 +11,8 @@ struct MessageDetailsView: View {
     var message: Message
     
     @Environment(\.presentationMode) var presentationMode
-    @State var messageManager: MessageManager
-    
+    @ObservedObject var messageManager: MessageManager
+
     var body: some View {
 
         VStack(alignment: .leading, spacing: 4) {
@@ -56,7 +56,7 @@ struct MessageDetailsView: View {
                     }, label: {
                         Text("Accept")
                             .padding(12)
-                            .foregroundStyle(Constants.Colors.text)
+                            .foregroundStyle(.black)
                             .frame(maxWidth: .infinity)
                             .background(Constants.Colors.green)
                             .bold()
@@ -113,7 +113,8 @@ struct MessageDetailsView: View {
         }
         .onAppear {
             let index = self.messageManager.messages.firstIndex(of: message)!
-            MessageManager.shared.messages[index].isRead = true
+            self.messageManager.messages[index].isRead = true
+            print(self.messageManager.messages)
         }
     }
 }

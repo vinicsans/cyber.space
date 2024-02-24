@@ -4,19 +4,23 @@ class MessageManager: ObservableObject {
     @Published var messages: [Message] = []
     
     @Published var showModal: Bool = false
+        
+    @Published var hasUnreadMessages: Bool = false
     
     private var messageToBeAddIndex = 0
     private var timer: Timer?
         
-    public static let shared = MessageManager()
+    static var shared = MessageManager()
     
     init() {
-        startTimer()
+        self.startTimer()
+        allMessagesRead()
     }
     
     private func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
             self.addMessage()
+            self.allMessagesRead()
         }
     }
     
@@ -31,6 +35,7 @@ class MessageManager: ObservableObject {
     
     func cancelFakeMessage() {
         showModal = false
+        allMessagesRead()
     }
     
     func submitTrueMessage() {
@@ -39,16 +44,19 @@ class MessageManager: ObservableObject {
     
     func cancelTrueMessage() {
         showModal = false
+        allMessagesRead()
     }
     
-    func allMessagesRead() -> Bool {
+    func allMessagesRead() -> Void {
         for message in messages {
-            if !message.isRead {
-                return false
+            if message.isRead {
+                hasUnreadMessages = true
             }
         }
         
-        return true
+        hasUnreadMessages = false
+        objectWillChange.send()
+        ObjectWillChangePublisher()
     }
     
     func addMessage() {
@@ -59,17 +67,21 @@ class MessageManager: ObservableObject {
             stopTimer()
         }
         
+        allMessagesRead()
+
         objectWillChange.send()
     }
     
     func addFakeMessage() {
         messages.append(fakeMessage)
         showModal = true
+        allMessagesRead()
     }
     
     func addTrueMessage() {
         messages.append(trueMessage)
         showModal = true
+        allMessagesRead()
     }
     
     private let trueMessage: Message = Message(

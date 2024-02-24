@@ -2,7 +2,7 @@ import SwiftUI
 
 struct BotAttackScene: View {
     private let starsBackgroundImage = Image("stars")
-    private let spaceShipAttackImage = Image("spaceship_attack")
+    private let spaceShipAttackImage = Image("spaceship")
     
     @Environment(\.presentationMode) var presentationMode
 
@@ -16,46 +16,45 @@ struct BotAttackScene: View {
             
             spaceShipAttackImage
                 .resizable()
+                .padding(EdgeInsets(top: 0, leading: -134, bottom: 0, trailing: 0))
                 .scaledToFill()
                 .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
             
-            VStack {
+            VStack(alignment: .trailing) {
+                
                 HStack {
+                    
+                    Spacer()
+                    
                     Text("Robots are trying to hack into the ship's access system!")
                         .font(.system(size: 40))
                         .foregroundStyle(Constants.Colors.text)
                         .bold()
                         .frame(maxWidth: 532)
+                        .multilineTextAlignment(.trailing)
+                        
                     
-                    Spacer()
                 }
-                .padding(EdgeInsets(top: 64, leading: 32, bottom: 0, trailing: 0))
                 
                 Spacer()
                 
-                HStack {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Text("Back to the ship")
-                            .font(.title)
-                            .bold()
-                            .foregroundStyle(.white)
-                    })
-                    .padding(24)
-                    .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 24))
-                    .padding(EdgeInsets(top: 0, leading: 32, bottom: 64, trailing: 0))
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Back to the ship")
+                        .padding(24)
+                        .foregroundStyle(Constants.Colors.Modal.blueBackground)
+                        .background(.regularMaterial)
+                        .font(.title)
+                        .bold()
+                        .clipShape(RoundedRectangle(cornerRadius: 24))
+                        .padding(24)
+                })
 
-                    
-                    Spacer()
-                }
-                
             }
+            .padding(EdgeInsets(top: 64, leading: 32, bottom: 32, trailing: 80))
+            .frame(width: .infinity, height: .infinity)
         }
-        .ignoresSafeArea()
-        .frame(width: .infinity, height: .infinity)
     }
 }
 

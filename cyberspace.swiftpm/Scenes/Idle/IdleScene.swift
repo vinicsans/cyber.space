@@ -17,6 +17,8 @@ struct IdleScene: View, GameScene {
     
     @State var homeIdle = true
     
+    @State private var rotation: Double = 0.0
+    
     private var showModal: Binding<Bool> {
         $viewModel.showModalInAction
     }
@@ -34,13 +36,14 @@ struct IdleScene: View, GameScene {
             HStack(alignment: .center) {
                 ZStack {
                     PlanetView()
+                        .rotationEffect(.degrees(rotation))
+                        .animation(Animation.linear(duration: 180.0).repeatForever(autoreverses: false))
+                        .onAppear {
+                            rotation = 360
+                        }
                         .background(.clear)
                         .frame(width: 200, height: 200)
-                        .background(.clear)
-                    
-                    Circle()
-                        .stroke(Constants.Colors.green, lineWidth: 3)
-                        .frame(width: 250, height: 250)
+
                 }
             }
 
@@ -62,22 +65,16 @@ struct IdleScene: View, GameScene {
                     )
                     
                 case .phishingAttack:
-                    UIIdleMenuView(parentViewModel: viewModel)
+                    UIIdleMenuView(parentViewModel: viewModel, scoreManager: self.scoreManager, messageManager: messageManager, state: .message)
                     .onAppear {
-                        MessageManager.shared.addTrueMessage()
-                        MessageManager.shared.addFakeMessage()
+                        messageManager.addTrueMessage()
+                        messageManager.addFakeMessage()
                     }
                 case .idle:
-                    UIIdleMenuView(parentViewModel: viewModel)
-                        .onAppear {
-                                viewModel.nextEvent(.idle, withTimer: true)
-                        }
+                    UIIdleMenuView(parentViewModel: viewModel, scoreManager: self.scoreManager, messageManager: messageManager, state: .idle)
                     
                 case .homeIdle:
-                    UIIdleMenuView(parentViewModel: viewModel)
-                        .onDisappear {
-                            viewModel.nextEvent(.homeIdle, withTimer: true)
-                        }
+                    UIIdleMenuView(parentViewModel: viewModel, scoreManager: self.scoreManager, messageManager: messageManager, state: .homeIdle)
                 }
             }
         }
@@ -86,10 +83,15 @@ struct IdleScene: View, GameScene {
 
 struct PlanetView: View {
     var body: some View {
-        Image("aqualis_svg")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .rotationEffect(Angle(degrees: 16))
+        ZStack {
+            Image("aqualis_svg")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+            
+            Circle()
+                .stroke(Constants.Colors.green, lineWidth: 3)
+                .padding(-24)
+        }
     }
 }
 

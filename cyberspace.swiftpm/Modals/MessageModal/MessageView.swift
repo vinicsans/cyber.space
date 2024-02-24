@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MessageView: View {
     
-    @ObservedObject var messageManager: MessageManager
+    @ObservedObject var messageManager: MessageManager = MessageManager.shared
             
     @State private var showModal = false
     @Environment(\.presentationMode) var presentationMode
@@ -18,6 +18,7 @@ struct MessageView: View {
             .navigationTitle("E-mails")
             .toolbar {
                 Button(action: {
+                    messageManager.allMessagesRead()
                     presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Image(systemName: "xmark")

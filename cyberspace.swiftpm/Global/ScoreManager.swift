@@ -16,6 +16,8 @@ enum Bonus {
 class ScoreManager: ObservableObject {
     @Published var cyberpoints: Int = 0
     
+    public static let shared = ScoreManager()
+    
     private let featuresAmount = 3
     private let pointsAtFeature = 100 / 3
     
