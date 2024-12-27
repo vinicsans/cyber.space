@@ -40,8 +40,6 @@ O desenvolvimento do **cyber.space** foi inspirado pela conexão entre o ambient
 
 *Testando o protótipo do sistema de mensagens.*
 
----
-
 ## 🏆 Reconhecimento  
 
 **cyber.space** foi reconhecido como um dos vencedores do **Swift Student Challenge** promovido pela Apple. O projeto destaca a importância de educar as pessoas sobre segurança cibernética de forma interativa.
