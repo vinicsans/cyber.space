@@ -1,75 +1,75 @@
-# cyber.space - vencedor do Swift Student Challenge.  🚀
+# cyber.space - Winner of the Swift Student Challenge 🚀
 
-**cyber.space** é um jogo educacional e interativo desenvolvido para conscientizar sobre a importância da **segurança cibernética**. Nele, os jogadores assumem o papel de Michael, um viajante intergaláctico que precisa proteger sua nave de ameaças digitais enquanto viaja para o planeta Aqualis. Durante essa jornada, os jogadores enfrentam desafios baseados em ataques reais, como **invasões de nanorobôs** e **tentativas de phishing**, enquanto aprendem boas práticas de segurança, como o uso de **senhas fortes** e a **identificação de e-mails fraudulentos**.
+**cyber.space** is an educational and interactive game developed to raise awareness about the importance of **cybersecurity**. In it, players take on the role of Michael, an intergalactic traveler who must protect his ship from digital threats while traveling to the planet Aqualis. During this journey, players face challenges based on real attacks, such as **nanorobot invasions** and **phishing attempts**, while learning good security practices like using **strong passwords** and **identifying fraudulent emails**.
 
-> **Prêmio**: cyber.space foi um dos vencedores do **Swift Student Challenge**, uma competição internacional promovida pela **Apple**. 🎉
+> **Award**: cyber.space was one of the winners of the **Swift Student Challenge**, an international competition hosted by **Apple**. 🎉
 
-![Interface inicial de cyber.space](./git/home.png)  
+![Initial interface of cyber.space](./git/home.png)  
 
-*Interface inicial de cyber.space, com o título e botão de início.*
+*Initial interface of cyber.space, with the title and start button.*
 
-## Objetivos
+## Objectives
 
-- **Gameplay Educacional**: Ensina conceitos de segurança cibernética por meio de desafios interativos. 
+- **Educational Gameplay**: Teaches cybersecurity concepts through interactive challenges.
 
-- **Cenários Inspirados em Ataques Reais**: Enfrente invasões de nanorobôs, tentativas de phishing e mais. 
+- **Real-World Attack Scenarios**: Face nanorobot invasions, phishing attempts, and more.
 
-- **Conscientização Digital**: Saiba como criar senhas fortes e identificar fraudes online.  
+- **Digital Awareness**: Learn how to create strong passwords and spot online fraud.
 
-- **Estética Exclusiva**: Todos os elementos gráficos foram criados manualmente para proporcionar uma experiência única.  
+- **Exclusive Aesthetics**: All graphic elements were hand-crafted to provide a unique experience.
 
-## 🌌 O Processo Criativo  
+## 🌌 The Creative Process
 
-O desenvolvimento do **cyber.space** foi inspirado pela conexão entre o ambiente online e a vastidão imprevisível do espaço. A criação do jogo envolveu:  
+The development of **cyber.space** was inspired by the connection between the online world and the vast unpredictability of space. The game creation process involved:
 
-1. Escolha da temática espacial para representar os desafios digitais (*sendo um tema que gosto muito*).
-2. Desenvolvimento manual de todos os elementos gráficos.  
-3. Planejamento detalhado para garantir uma experiência imersiva e educativa.  
+1. Choosing the space theme to represent digital challenges (*a theme I really enjoy*).
+2. Manually creating all the graphic elements.
+3. Detailed planning to ensure an immersive and educational experience.
 
-![Cena em que nanorôbos atacam a nave](./git/attack.jpg)  
+![Scene where nanorobots attack the ship](./git/attack.jpg)  
 
-*Cena em que nanorôbos atacam a nave.*
+*Scene where nanorobots attack the ship.*
 
-## 🚀 Desafios no Desenvolvimento  
+## 🚀 Development Challenges
 
-- Foi um grande desafio procurar meios de ensinar os jogadores a identificar ataques de phishing, exigindo pesquisa detalhada e testes constantes, de modo que não fique chato.
+- A significant challenge was finding ways to teach players how to identify phishing attacks, requiring in-depth research and constant testing to ensure it didn’t become boring.
 
-- O projeto foi desenvolvido utilizando um MacMini acessado remotamente, disponibilizado pelo Instituto Federal do Ceará, o que ocasionou atrasos quando o equipamento ficou indisponível.
+- The project was developed using a MacMini remotely accessed from the Federal Institute of Ceará, which caused delays when the equipment became unavailable.
 
-![Testando o protótipo do sistema de mensagens](./git/prototipe.gif)
+![Testing the message system prototype](./git/prototipe.gif)
 
-*Testando o protótipo do sistema de mensagens.*
+*Testing the message system prototype.*
 
-## 🏆 Reconhecimento  
+## 🏆 Recognition
 
-**cyber.space** foi reconhecido como um dos vencedores do **Swift Student Challenge** promovido pela Apple. O projeto destaca a importância de educar as pessoas sobre segurança cibernética de forma interativa.
+**cyber.space** was recognized as one of the winners of the **Swift Student Challenge** hosted by Apple. The project highlights the importance of educating people about cybersecurity in an interactive way.
 
-## 🛠️ Tecnologias Utilizadas  
+## 🛠️ Technologies Used
 
-- **Swift**: Linguagem de programação principal.
-- **SwiftUI**: Como principal framework.  
-- **Xcode**: Ambiente de desenvolvimento integrado (IDE).  
-- **Illustrator, Photoshop e Figma**: Para criação de gráficos manuais.
+- **Swift**: Main programming language.
+- **SwiftUI**: Primary framework.
+- **Xcode**: Integrated development environment (IDE).
+- **Illustrator, Photoshop, and Figma**: For creating manual graphics.
 
-## 📦 Instalação e Execução  
+## 📦 Installation and Execution
 
-Para rodar o **cyber.space**, siga os passos abaixo:  
+To run **cyber.space**, follow the steps below:
 
 ```bash
-# Clone o repositório
-git clone https://github.com/seuusuario/cyberspace.git
+# Clone the repository
+git clone https://github.com/yourusername/cyberspace.git
 
-# Abra o projeto no Xcode
+# Open the project in Xcode
 cd cyberspace
 open cyberspace.xcodeproj
 
-# Compile e execute no simulador ou em um dispositivo físico
+# Compile and run on a simulator or a physical device
 ```
 
 ## ⚠️ Disclaimer
 
-Devido ao prazo apertado para a entrega do **Swift Student Challenge**, a qualidade do código do **cyber.space** pode não refletir totalmente minha capacidade técnica. Este projeto foi desenvolvido dentro de um tempo limitado, e, com mais tempo para planejamento e refinamento, eu certamente poderia aprimorar ainda mais a implementação e otimizar o código. 
+Due to the tight deadline for the **Swift Student Challenge**, the quality of the **cyber.space** code may not fully reflect my technical abilities. This project was developed within a limited timeframe, and with more time for planning and refinement, I could have further improved the implementation and optimized the code.
 
-## 📝 Licença  
+## 📝 License
 
-Este projeto está licenciado sob os termos da [MIT License](./LICENSE).  
+This project is licensed under the terms of the [MIT License](./LICENSE).
