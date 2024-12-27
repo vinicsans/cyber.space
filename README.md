@@ -66,6 +66,10 @@ open cyberspace.xcodeproj
 # Compile e execute no simulador ou em um dispositivo físico
 ```
 
+## ⚠️ Disclaimer
+
+Devido ao prazo apertado para a entrega do **Swift Student Challenge**, a qualidade do código do **cyber.space** pode não refletir totalmente minha capacidade técnica. Este projeto foi desenvolvido dentro de um tempo limitado, e, com mais tempo para planejamento e refinamento, eu certamente poderia aprimorar ainda mais a implementação e otimizar o código. 
+
 ## 📝 Licença  
 
 Este projeto está licenciado sob os termos da [MIT License](./LICENSE).  
